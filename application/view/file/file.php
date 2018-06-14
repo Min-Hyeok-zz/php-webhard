@@ -45,9 +45,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php if ($this->param->path != "0"): ?>
+                                            <tr>
+                                                <td colspan="6"><a href="?path=<?php echo $this->parent ?>">..</a></td>
+                                            </tr>
+                                        <?php endif ?>
                                         <?php foreach ($this->folder as $data): ?>
                                             <tr>
-                                                <td><a href="<?php echo $data->idx ?>"><?php echo $data->file_name ?></a></td>
+                                                <td><a href="<?php echo "?path={$data->idx}" ?>"><?php echo $data->file_name ?></a></td>
                                                 <td class="center">-</td>
                                                 <td class="center">디렉토리</td>
                                                 <td class="center"><?php echo $data->date ?></td>

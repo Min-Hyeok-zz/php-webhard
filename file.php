@@ -18,7 +18,7 @@
                                 <button type="button" class="btn btn-primary">파일 업로드</button>
                             </div>
                             <div class="left">
-                                위치 : /
+                                위치 : /  ?>
                             </div>
                             <br />
                             <div class="table-responsive">

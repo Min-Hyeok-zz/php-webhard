@@ -36,7 +36,6 @@
 			return $this->query()->rowCount();
 		}
 
-		//배열을 컬럼 형태로 반환
 		function get_column($arr,$cancel){
 			$cancel = explode("/", $cancel);
 			$column = "";
@@ -48,7 +47,6 @@
 			return substr($column, 2);
 		}
 
-		//action의 value값에 따라 쿼리문 변경
 		function get_query($column){
 			switch ($this->action) {
 				case 'add':

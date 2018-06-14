@@ -12,11 +12,12 @@
                         <div class="panel-heading">내부 공유 리스트</div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
+                            <form action="" method="post">
                             <div class="right">
-                                <button type="button" class="btn btn-primary">공유삭제</button>
+                                <button type="submit" class="btn btn-primary">공유삭제</button>
                             </div>
                              <div class="left">
-                                전체 <b>91</b>건 공유 중 <b>1</b>건 공유 중
+                                전체 <b><?php echo $this->total ?></b>건 공유 중 <b><?php echo $this->my ?></b>건 공유 중
                             </div>
                             <br />
                             <div class="table-responsive">
@@ -32,7 +33,7 @@
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th class="center"><input type="checkbox" name="chk" value="" /></th>
+                                            <th class="center"><input type="checkbox" name="chk[]" id="chk" value="" /></th>
                                             <th class="center">파일명</th>
                                             <th class="center">파일용량</th>
                                             <th class="center">공유자</th>
@@ -42,43 +43,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="center"><input type="checkbox" name="chk" value="" /></td>
-                                            <td><a href="http://localhost/?q=aSv3">기능경기대회2018.zip</a></td>
-                                            <td class="right">1,332 MB</td>
-                                            <td class="center">관리자(admin)</td>
-                                            <td class="center">2018-01-01</td>
-                                            <td class="center">1,002</td>
-                                            <td class="left">
-                                               <a href="http://localhost/download.php?id=asbc">http://localhost/download.php?id=asbc</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center"></td>
-                                            <td><a href="http://localhost/?q=aSv3">기능경기대회2017.zip</a></td>
-                                            <td class="right">10,332 MB</td>
-                                            <td class="center">사용자(user1)</td>
-                                            <td class="center">2018-01-01</td>
-                                            <td class="center">32</td>
-                                            <td class="left">
-                                               <a href="http://localhost/download.php?id=asbc">http://localhost/download.php?id=asc</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center"><input type="checkbox" name="chk" value="" /></td>
-                                            <td><a href="http://localhost/?q=aSv3">기능경기대회2016.zip</a></td>
-                                            <td class="right">1,332 MB</td>
-                                            <td class="center">관리자(admin)</td>
-                                            <td class="center">2018-01-01</td>
-                                            <td class="center">5,002</td>
-                                            <td class="left">
-                                               <a href="http://localhost/download.php?id=asbc">http://localhost/download.php?id=as</a>
-                                            </td>
-                                        </tr>
+                                        <?php foreach ($this->list as $data): ?>
+                                            <tr>
+                                                <td class="center">
+                                                <?php if ($_SESSION['member']->idx == $data->member_idx || $_SESSION['member']->level == "10"): ?>
+                                                    <input type="checkbox" name="chk[]" value="<?php echo $data->idx ?>" />
+                                                <?php endif ?></td>
+                                                <td><a href="/share/in_down/<?php echo $data->idx ?>"><?php echo "{$data->file_name}.{$data->file_type}" ?></a></td>
+                                                <td class="right"><?php echo get_size($data->file_size); ?></td>
+                                                <td class="center"><?php echo $data->member_name ?>(<?php echo $data->member_id ?>)</td>
+                                                <td class="center"><?php echo $data->date ?></td>
+                                                <td class="center"><?php echo number_format($data->hit) ?></td>
+                                                <td class="left">
+                                                   <a href="http://localhost/share/in_down/<?php echo $data->idx ?>">http://localhost/share/in_down/<?php echo $data->idx ?></a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             </div>
                             <!-- /.table-responsive -->
+                            </form>
                         </div>
                         <!-- /.panel-body -->
                     </div>

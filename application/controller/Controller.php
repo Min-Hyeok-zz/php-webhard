@@ -1,12 +1,15 @@
 <?php
 	class Controller{
 
+		var $isMember;
+
 		function __construct(){
 			$this->param = Application::getParam();
 			$model = "Model_{$this->param->type}";
 			new $model();
 			$this->model = new $model();
 			$this->index();
+			$this->isMember = isset($_SESSION['member']) ? $_SESSION['member'] : false;
 		}
 
 		function index(){

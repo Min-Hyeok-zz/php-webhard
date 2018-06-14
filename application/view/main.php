@@ -52,6 +52,7 @@
                                     <input class="form-control" placeholder="암호" name="pw" type="password">
                                 </div>
                                 <button class="btn btn-lg btn-success btn-block" type="submit">로그인</button>
+                                <a class="btn btn-lg btn-success btn-block" href="/share/out">외부 공유 목록</a>
                             </fieldset>
                         </form>
                     </div>

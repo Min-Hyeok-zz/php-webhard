@@ -15,8 +15,12 @@
 
 		function memberDelete(){
 			$data = $this->memberInfo();
-			rmdir(_DATA.$data->id);
-			$this->query("DELETE FROM member where idx='{$this->param->idx}'");
+			access($data->level == "10","관리자는 삭제할 수 없습니다.");
+			@rmdir(_DATA.$data->id);
+			$this->query("
+				DELETE FROM member where idx='{$this->param->idx}';
+				DELETE FROM file where midx='{$this->param->idx}';
+			");
 			alert("삭제되었습니다.");
 			move("/member/member");
 		}
@@ -35,12 +39,11 @@
 						$add_sql = ",pw='{$pw}'";
 						access($this->idChk() != "","중복된 아이디 입니다.");
 						$column = $this->get_column($_POST,$cancle);
-						if (isset($this->param->idx)){
+						if ($this->action == "update"){
 							$add_sql .= " where idx='{$this->param->idx}'";	
-							$id = $data->id;
+							@rmdir(_DATA.$data->id);
 						} 
 						$column .= $add_sql;
-						@rmdir(_DATA.$id);
 						@mkdir(_DATA.$_POST['id']);
 						access($this->get_query($column),"완료되었습니다.","/member/member");
 					break;

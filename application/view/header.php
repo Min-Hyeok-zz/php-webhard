@@ -30,7 +30,10 @@
     <script src="<?php echo _VENDOR ?>metisMenu/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="<?php echo _JS ?>/sb-admin-2.js"></script>
+    <script src="<?php echo _JS ?>sb-admin-2.js"></script>
+
+    <!-- Custom JS -->
+    <script src="<?php echo _JS ?>app.js"></script>
 </head>
 
 <body>
@@ -46,7 +49,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <?php if (isset($_SESSION['member'])): ?>
                 <a class="navbar-brand" href="/file/file">웹하드(<?php echo $_SESSION['member']->id ?>/<?php echo $_SESSION['member']->name ?>)</a>
+                <?php else: ?>
+                <a class="navbar-brand" href="/">웹하드(로그인 해주세요)</a>
+                <?php endif ?>
             </div>
             <!-- /.navbar-header -->
 
@@ -56,10 +63,15 @@
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
+                        <?php if (isset($_SESSION['member']) && $_SESSION['member']->level == "10"): ?>
                         <li><a href="/member/member"><i class="fa fa-user fa-fw"></i> 회원리스트</a>
+                        <?php endif ?>
                         </li>
-                        <li class="divider"></li>
+                        <?php if (isset($_SESSION['member'])): ?>
                         <li><a href="/member/logout"><i class="fa fa-sign-out fa-fw"></i> 로그아웃</a>
+                        <?php else: ?>
+                        <li><a href="/"><i class="fa fa-sign-out fa-fw"></i> 로그인</a>
+                        <?php endif ?>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

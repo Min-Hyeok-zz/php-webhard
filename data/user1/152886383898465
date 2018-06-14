@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>css slide</title>
+<style>
+	#slide{width: 600px;height: 400px;position: relative;margin: 0 auto;margin-top: 50px;overflow: hidden;}
+	.move{width: 300%;height: 100%;display: flex;transition: 1s;}
+	.move > div{width: calc(100% / 3);height: 100%;}
+	.move > div:nth-child(1){background: red;}
+	.move > div:nth-child(2){background: blue;}
+	.move > div:nth-child(3){background: green;}
+
+	#slide1:checked ~ .move{margin-left: -0%;}
+	#slide2:checked ~ .move{margin-left: -100%;}
+	#slide3:checked ~ .move{margin-left: -200%;}
+
+	.btn{position: absolute;width: 100%;top: 45%;}
+	.btn > label{display: inline-block;width: 30px;height: 30px;background: #000;color: #fff;cursor: pointer;text-align: center;line-height: 30px;position: absolute;}
+	.left{left: 40px;}
+	.right{right: 40px;}
+
+	#slide1:checked ~ .btn > .slide1,
+	#slide2:checked ~ .btn > .slide2,
+	#slide3:checked ~ .btn > .slide3{z-index: 1;}
+</style>
+</head>
+<body>
+
+	<div id="slide">
+		<input type="radio" name="slide" id="slide1" checked>
+		<input type="radio" name="slide" id="slide2">
+		<input type="radio" name="slide" id="slide3">
+		<div class="move">
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		<div class="btn">
+			<label for="slide1" class="slide2 left">&#10094;</label>
+			<label for="slide1" class="slide3 right">&#10095;</label>
+			<label for="slide2" class="slide3 left">&#10094;</label>
+			<label for="slide2" class="slide1 right">&#10095;</label>
+			<label for="slide3" class="slide1 left">&#10094;</label>
+			<label for="slide3" class="slide2 right">&#10095;</label>
+		</div>
+	</div>
+	
+</body>
+</html>

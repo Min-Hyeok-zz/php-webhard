@@ -28,13 +28,13 @@
 	}
 
 	function adminChk(){
-		access($_SESSION['member']->level != 10,"해당 페이지는 관리자만 접근 가능합니다.");
+		access(!isset($_SESSION['member']) || $_SESSION['member']->level != 10,"해당 페이지는 관리자만 접근 가능합니다.");
 	}
 
 	function file_upload($file){
 		$name = $file['name'];
 		$tmp_name = $file['tmp_name'];
-		access(!$tmp_name,"파일이 업로드 되지 않았습니다.");
+		// access(!$tmp_name,"파일의 용량이 초과되었습니다.");
 		$change_name = time().rand(0,99999);
 		if (move_uploaded_file($tmp_name, _DATA."{$_SESSION['member']->id}/{$change_name}")) {
 			return $change_name;
